@@ -1,0 +1,53 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.eska'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.junit.vintage:junit-vintage-engine:5.7.2'
+
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.22.0'
+    testImplementation("io.github.bonigarcia:webdrivermanager:5.9.1")
+
+    implementation group: 'io.cucumber', name: 'cucumber-java', version: '7.18.0'
+    testImplementation group: 'io.cucumber', name: 'cucumber-junit', version: '7.18.0'
+}
+
+test {
+    useJUnitPlatform()
+    systemProperty "cucumber.filter.tags", System.getProperty("cucumber.filter.tags")
+
+    testLogging {
+        events "PASSED", "FAILED", "SKIPPED"
+    }
+}
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+tasks.register('webUIAutoTest'){
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = [
+                    '--plugin', 'pretty',
+                    '--plugin', 'html:reports/cucumber-api-report.html',
+                    '--glue', 'stepDef',
+                    '--tags', '@WEB',
+                    'src/test/java/feature'
+            ]
+        }
+    }
+}
