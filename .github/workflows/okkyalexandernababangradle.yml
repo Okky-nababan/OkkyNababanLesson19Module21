@@ -11,7 +11,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-  
     steps:
     # download repo
     - uses: actions/checkout@v4
@@ -32,5 +31,5 @@ jobs:
       run: chmod +x gradlew
 
     # execute gradlew command for running cucumber test
-    - name: Execute test
+    - name: Execute Test
       run: ./gradlew cucumber
