@@ -1,6 +1,6 @@
 package pages;
 import org.openqa.selenium.By;
-import utilties.utility;
+import helper.utility;
 
 public class homePage extends utility {
 

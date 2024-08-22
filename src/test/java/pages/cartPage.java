@@ -1,7 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
-import utilties.utility;
+import helper.utility;
 
 public class cartPage extends utility {
 

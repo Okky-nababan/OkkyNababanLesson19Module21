@@ -1,6 +1,6 @@
 package pages;
 
-import utilties.utility;
+import helper.utility;
 import org.openqa.selenium.By;
 
 public class loginPage extends utility {

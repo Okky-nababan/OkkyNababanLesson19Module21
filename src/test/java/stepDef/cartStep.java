@@ -1,13 +1,8 @@
 package stepDef;
 
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.cartPage;
-import pages.homePage;
-import utilties.utility;
-
-import static utilties.utility.driver;
 
 public class cartStep {
 
