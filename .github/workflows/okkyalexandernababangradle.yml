@@ -26,13 +26,6 @@ jobs:
       - name: Execute API Test
         run: ./gradlew apiAutoTest
 
-      - name: Deploy report to Github Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v3.7.3
-        with:
-          PERSONAL_TOKEN: ${{ secrets.TOKEN_GITHUB }}
-          PUBLISH_DIR: reports
-
   run-web-automation:
     runs-on: ubuntu-latest
 
@@ -59,10 +52,3 @@ jobs:
 
       - name: Execute Web Test
         run: ./gradlew webUIAutoTest
-
-      - name: Deploy report to Github Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v3.7.3
-        with:
-          PERSONAL_TOKEN: ${{ secrets.TOKEN_DEPLOY_FINAL_PROJECT }}
-          PUBLISH_DIR: reports
